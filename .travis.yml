@@ -3,6 +3,7 @@ dist: trusty
 
 before_install:
   - sudo apt-get remove -y lxc
+  - sudo rm -f /etc/apparmor.d/abstractions/lxc/container-base
   - echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get -qq update
   - sudo apt-get install -t trusty-backports -y lxd
@@ -10,7 +11,7 @@ before_install:
 language: python
 python:
   - "2.7"
-  - "3.4"
+
 install: pip install -U -r requirements.txt -r test-requirements.txt
 script:
   - nosetests pylxd
