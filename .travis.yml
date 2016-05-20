@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 
 before_install:
-  - sudo apt-get remove lxc
+  - sudo apt-get remove -y lxc
   - echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get -qq update
   - sudo apt-get install -t trusty-backports -y lxd
