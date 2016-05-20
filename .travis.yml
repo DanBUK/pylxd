@@ -1,3 +1,11 @@
+sudo: required
+dist: trusty
+
+before_install:
+  - echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+  - sudo apt-get -qq update
+  - sudo apt-get install -t trusty-backports -y lxd
+
 language: python
 python:
   - "2.7"
