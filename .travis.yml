@@ -6,7 +6,7 @@ before_install:
   - sudo apt-get -qq update
 #  - sudo apt-get remove -y lxc
 #  - sudo rm -f /etc/apparmor.d/abstractions/lxc/container-base
-  - sudo apt-get install -t trusty-backports -y lxd
+  - sudo apt-get install -t trusty-backports -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" lxd
   - sudo apt-get install -y python2.7 python-pip python-dev libffi-dev libssl-dev
   - sudo pip install virtualenv
   - id
