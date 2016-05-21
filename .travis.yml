@@ -2,17 +2,21 @@ sudo: required
 dist: trusty
 
 before_install:
-  - sudo apt-get remove -y lxc
-  - sudo rm -f /etc/apparmor.d/abstractions/lxc/container-base
   - echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get -qq update
+  - sudo apt-get remove -y lxc
   - sudo apt-get install -t trusty-backports -y lxd
+  - sudo apt-get install -y python2.7 python-pip python-dev libffi-dev libssl-dev
+  - sudo pip install virtualenv
+  - id
+  - sudo virtualenv -p /usr/bin/python2.7 /opt/python2.7
+  - sudo /bin/bash -c 'source /opt/python2.7/bin/activate; pip install pyopenssl ndg-httpsclient pyasn1'
 
-language: python
-python:
-  - "2.7"
+# language: python
+# python:
+#  - "2.7"
 
-install: pip install -U -r requirements.txt -r test-requirements.txt
+install: sudo /bin/bash -c 'source /opt/python2.7/bin/activate; pip install -U -r requirements.txt -r test-requirements.txt'
 script:
-  - nosetests pylxd
-  - flake8 --ignore=E123,E125
+  - /opt/python2.7/bin/nosetests pylxd
+  - /opt/python2.7/bin/flake8 --ignore=E123,E125
